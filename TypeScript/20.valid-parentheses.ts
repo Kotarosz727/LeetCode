@@ -6,29 +6,26 @@
 
 // @lc code=start
 function isValid(s: string): boolean {
-    const smap = new Map([
+    const map = new Map([
         ['(', ')'],
         ['[', ']'],
         ['{', '}']
     ])
 
-    const tmp: string[] = []
-    const parentheses: string[] = [...s]
+    const stack: string[] = []
 
-    for (let i: number = 0; i < parentheses.length; i++){
-        const target:string = parentheses[i]
-
-        if (smap.has(target)) {
-            tmp.push(smap.get(target))   
-        } else if (tmp.pop() === target){
+    for (const char of s){
+        if (map.has(char)) {
+            stack.push(map.get(char))   
+        } else if (stack.pop() === char){
             continue
         } else {
-            tmp.push(target)
+            stack.push(char)
             break
         }
     }
 
-    return tmp.length === 0
+    return stack.length === 0
 };
 // @lc code=end
 
