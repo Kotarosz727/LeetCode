@@ -6,7 +6,9 @@
 
 // @lc code=start
 function isValid(s: string): boolean {
-    const map = new Map([
+    if (s.length < 2) return false
+
+    const map = new Map<string, string>([
         ['(', ')'],
         ['[', ']'],
         ['{', '}']
@@ -20,8 +22,7 @@ function isValid(s: string): boolean {
         } else if (stack.pop() === char){
             continue
         } else {
-            stack.push(char)
-            break
+            return false
         }
     }
 
