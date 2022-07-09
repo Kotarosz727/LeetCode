@@ -17,13 +17,8 @@ function isValid(s: string): boolean {
     const stack: string[] = []
 
     for (const char of s){
-        if (map.has(char)) {
-            stack.push(map.get(char))   
-        } else if (stack.pop() === char){
-            continue
-        } else {
-            return false
-        }
+        if (map.has(char)) stack.push(map.get(char))   
+        else if (stack.pop() !== char) return false
     }
 
     return stack.length === 0
