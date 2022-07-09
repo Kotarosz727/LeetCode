@@ -6,7 +6,7 @@
 
 // @lc code=start
 function isValid(s: string): boolean {
-    if (s.length < 2) return false
+    if (s.length % 2 !== 0) return false
 
     const map = new Map<string, string>([
         ['(', ')'],
