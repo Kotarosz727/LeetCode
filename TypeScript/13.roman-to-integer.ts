@@ -16,21 +16,24 @@ function romanToInt(s: string): number {
         ['M', 1000]
     ])
     
-    const array: number[] = []
-    for (const v of s){
-        array.push(map.get(v))
-    }
-
     let result: number = 0
-    for (let i = 0 ; i < array.length; i++){
-        if (i > 0 && array[i] > array[i-1]) {
-            let tmp = array[i] - array[i-1] - array[i-1]
-            result += tmp
+    let prev: number = 0
+
+    for (const v of s){
+        let curr = map.get(v)
+
+        if(prev === 0) {
+            prev = curr
+        } else if (prev >= curr){
+            result += prev
+            prev = curr
+        } else {
+            result += curr - prev
+            prev = 0
         }
-        else result += array[i]
     }
 
-    return result
+    return result + prev
 };
 // @lc code=end
 
